@@ -1,0 +1,23 @@
+<html>
+<head>
+
+</head>
+<body>
+<img src="close.png" id="ocr" />
+<div id="display"></div>
+<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+<script src=".\tesseract.js"></script>
+<script>
+    var img = new Image();
+    img.src = document.getElementById('ocr').src;
+	img.crossOrigin = "Anonymous";
+    img.onload = function() {
+        Tesseract.recognize(img,{
+            progress: function(e){
+                console.log(e)
+            }
+        }).then( function(d){ document.getElementById('display').innerHTML+=d.text } )
+    }
+</script>
+</body>
+</html>
